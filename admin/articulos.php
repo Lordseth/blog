@@ -36,7 +36,7 @@
                 </thead>
                 <tbody>
 
-                    <<?php foreach($resultado as $articulo) : ?>
+                    <?php foreach($resultado as $articulo) : ?>
                     <tr>
                         <td><?php echo $articulo->id; ?></td>
                         <td><?php echo $articulo->titulo; ?></td>

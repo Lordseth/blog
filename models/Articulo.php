@@ -32,7 +32,7 @@ class Articulo {
         return $articulos;
     }
 
-    //Obtener los artículos
+    //Obtener articulo individual
     public function leer_individual($id){
         //Crear query
         $query = 'SELECT id, titulo, imagen, texto, fecha_creacion FROM ' . $this->table . ' WHERE id = ? LIMIT 0,1 ';
@@ -47,6 +47,71 @@ class Articulo {
         $stmt->execute();
         $articulo = $stmt->fetch(PDO::FETCH_OBJ);
         return $articulo;
+    }
+
+     //Crear un articulo
+     public function crear($titulo, $newImageName, $texto){
+        //Crear query
+        $query = 'INSERT INTO ' . $this->table . ' (titulo, imagen, texto)VALUES(:titulo, :imagen, :texto) ';
+
+        //Preparar sentencia
+        $stmt = $this->conn->prepare($query);
+
+        // Vincular parametro
+        $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
+        $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
+        $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+
+        //Ejecutar query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Si hay error
+        printf("error \n", $stmt->error);
+        
+    }
+
+     //Actualizar un articulo
+     public function actualizar($id, $titulo, $newImageName, $texto){
+
+        if ($newImageName == "") {
+            //Crear query
+            $query = 'UPDATE' . $this->table . ' SET titulo = :titulo, texto = :texto WHERE id = :id  ';
+
+            //Preparar sentencia
+            $stmt = $this->conn->prepare($query);
+
+            // Vincular parametro
+            $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
+            $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+            //Ejecutar query
+            if ($stmt->execute()) {
+                return true;
+            }
+            }else {
+                 //Crear query
+                $query = 'UPDATE' . $this->table . ' SET titulo = :titulo, texto = :texto, imagen = :imagen WHERE id = :id  ';
+
+                //Preparar sentencia
+                $stmt = $this->conn->prepare($query);
+
+                // Vincular parametro
+                $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
+                $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+
+                //Ejecutar query
+                if ($stmt->execute()) {
+                    return true;
+                }
+            }
+
+            // Si hay error
+            printf("error \n", $stmt->error);
+        
     }
 
 

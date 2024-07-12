@@ -1,7 +1,56 @@
 <?php include("../includes/header.php") ?>
 
-    <div class="row">
-        
+<?php
+
+     // Instanciar base de datos y conexion
+     $baseDatos = new Basemysql();
+     $db = $baseDatos->connect();
+ 
+     if (isset($_POST['crearArticulo'])) {
+        // Obtener los valores
+        $titulo = $_POST["titulo"];
+        $texto = $_POST["texto"];
+
+        if ($_FILES["imagen"]["error"] > 0) {
+            $error = "Error, ningun archivo selecconado";
+        }else {
+            // Si entra es porque si se subio la imagen
+            // Validar los demas campos
+            if (empty($titulo) || $titulo == ""  
+             || empty($texto) || $texto == "" ) {
+                $error = "Error, algunos campos estan vacios";
+            }else {
+                // Si entra por aqui es porque se enviaron correctamente todos los campos.
+                // Entonces se realiza la subida de archivos.
+                $image = $_FILES['imagen']['name'];
+                $imageArr = explode('.', $image);
+                $rand = rand(1000, 99999);
+                $newImageName = $imageArr[0] . $rand . '.' . $imageArr[1];
+                $rutaFinal = "../img/articulos/" . $newImageName;
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaFinal);
+
+                //Instanciamos el articulo
+                $articulo = new Articulo($db);
+
+                if ($articulo->crear($titulo, $newImageName, $texto)) {
+                    $mensaje = "Articulo creado correctamente";
+                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                }
+            }
+        }
+     }
+
+?>
+
+<div class="row">
+        <div class="col-sm-12">
+            <?php if(isset($error)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $error; ?></strong> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+            <?php endif; ?>
+        </div>  
     </div>
 
     <div class="row">
