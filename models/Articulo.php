@@ -73,11 +73,11 @@ class Articulo {
     }
 
      //Actualizar un articulo
-     public function actualizar($id, $titulo, $newImageName, $texto){
+     public function actualizar($id, $titulo, $texto, $newImageName){
 
         if ($newImageName == "") {
             //Crear query
-            $query = 'UPDATE' . $this->table . ' SET titulo = :titulo, texto = :texto WHERE id = :id  ';
+            $query = 'UPDATE ' . $this->table . ' SET titulo = :titulo, texto = :texto WHERE id = :id  ';
 
             //Preparar sentencia
             $stmt = $this->conn->prepare($query);
@@ -93,7 +93,7 @@ class Articulo {
             }
             }else {
                  //Crear query
-                $query = 'UPDATE' . $this->table . ' SET titulo = :titulo, texto = :texto, imagen = :imagen WHERE id = :id  ';
+                $query = 'UPDATE ' . $this->table . ' SET titulo = :titulo, texto = :texto, imagen = :imagen WHERE id = :id  ';
 
                 //Preparar sentencia
                 $stmt = $this->conn->prepare($query);
@@ -101,7 +101,9 @@ class Articulo {
                 // Vincular parametro
                 $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
                 $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
+                $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
                 $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+                
 
                 //Ejecutar query
                 if ($stmt->execute()) {

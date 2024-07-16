@@ -15,6 +15,64 @@
     $articulos = new Articulo($db);
     $resultado = $articulos->leer_individual($id);
 
+    // Actualizamos articulo
+    if (isset($_POST['editarArticulo'])) {
+        // Obtener los valores
+        $idArticulo = $_POST["id"];
+        $titulo = $_POST["titulo"];
+        $texto = $_POST["texto"];
+
+        if ($_FILES["imagen"]["error"] > 0) {
+
+            // No se sube imagen pero permite actualizar los demas campos
+            if (empty($titulo) || $titulo == ""  
+             || empty($texto) || $texto == "" ) {
+                $error = "Error, algunos campos estan vacios";
+            }else {
+
+                //Instanciamos el articulo
+                $articulo = new Articulo($db);
+
+                $newImageName = "";
+
+                if ($articulo->actualizar($idArticulo, $titulo, $texto, $newImageName)) {
+                    $mensaje = "Articulo actualizado correctamente";
+                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                    exit();
+                }else {
+                    $error = "Error, No se pudo actualizar";
+                }
+            }
+            
+        }else {
+            // Si entra es porque si se subio la imagen
+            // Validar los demas campos
+            if (empty($titulo) || $titulo == ""  
+             || empty($texto) || $texto == "" ) {
+                $error = "Error, algunos campos estan vacios";
+            }else {
+                // Si entra por aqui es porque se enviaron correctamente todos los campos.
+                // Entonces se realiza la subida de archivos.
+                $image = $_FILES['imagen']['name'];
+                $imageArr = explode('.', $image);
+                $rand = rand(1000, 99999);
+                $newImageName = $imageArr[0] . $rand . '.' . $imageArr[1];
+                $rutaFinal = "../img/articulos/" . $newImageName;
+                move_uploaded_file($_FILES['imagen']['tmp_name'], $rutaFinal);
+
+                //Instanciamos el articulo
+                $articulo = new Articulo($db);
+
+                if ($articulo->actualizar($idArticulo,$titulo, $newImageName, $texto)) {
+                    $mensaje = "Articulo actualizado correctamente";
+                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                }else {
+                    $error = "Error, No se pudo actualizar";
+                }
+            }
+        }
+     }
+
 ?>
 
 <div class="row">
@@ -30,7 +88,7 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action="" enctype="multipart/form-data">
 
-            <input type="hidden" name="id" value="4">
+            <input type="hidden" name="id" value="<?php echo $resultado->id ?>">
 
             <div class="mb-3">
                 <label for="titulo" class="form-label">Título:</label>
