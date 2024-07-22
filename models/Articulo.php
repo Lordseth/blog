@@ -116,5 +116,26 @@ class Articulo {
         
     }
 
+    //Borrar un articulo
+    public function borrar($idArticulo){
+        //Crear query
+        $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id ';
+
+        //Preparar sentencia
+        $stmt = $this->conn->prepare($query);
+
+        // Vincular parametro
+        $stmt->bindParam(":id", $idArticulo, PDO::PARAM_INT);
+
+        //Ejecutar query
+        if ($stmt->execute()) {
+            return true;
+        }
+
+        // Si hay error
+        printf("error \n", $stmt->error);
+        
+    }
+
 
 }

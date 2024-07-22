@@ -37,7 +37,7 @@
 
                 if ($articulo->actualizar($idArticulo, $titulo, $texto, $newImageName)) {
                     $mensaje = "Articulo actualizado correctamente";
-                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                    header("Location:articulos.php?mensaje=" . urlencode($mensaje));
                     exit();
                 }else {
                     $error = "Error, No se pudo actualizar";
@@ -63,9 +63,9 @@
                 //Instanciamos el articulo
                 $articulo = new Articulo($db);
 
-                if ($articulo->actualizar($idArticulo,$titulo, $newImageName, $texto)) {
+                if ($articulo->actualizar($idArticulo, $titulo, $texto, $newImageName)) {
                     $mensaje = "Articulo actualizado correctamente";
-                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                    header("Location:articulos.php?mensaje=" . urlencode($mensaje));
                 }else {
                     $error = "Error, No se pudo actualizar";
                 }
@@ -73,10 +73,35 @@
         }
      }
 
+     if (isset($_POST['borrarArticulo'])) {
+        // Obtener el id
+        $idArticulo = $_POST['id'];
+
+        //Instanciamos el articulo
+        $articulo = new Articulo($db);
+
+        if ($articulo->borrar($idArticulo)) {
+            $mensaje = "Articulo borrado correctamente";
+            header("Location:articulos.php?mensaje=" . urlencode($mensaje));
+        }else {
+            $error = "Error, No se pudo borrar";
+     }
+      
+    }
+
 ?>
 
 <div class="row">
-       
+<div class="row">
+        <div class="col-sm-12">
+            <?php if(isset($error)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    <strong><?php echo $error; ?></strong> 
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+            <?php endif; ?>
+        </div>  
+    </div>
     </div>
 
 <div class="row">

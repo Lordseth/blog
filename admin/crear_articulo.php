@@ -34,7 +34,7 @@
 
                 if ($articulo->crear($titulo, $newImageName, $texto)) {
                     $mensaje = "Articulo creado correctamente";
-                    header("Location:articulos.php?mensaje=" . urldecode($mensaje));
+                    header("Location:articulos.php?mensaje=" . urlencode($mensaje));
                 }
             }
         }
