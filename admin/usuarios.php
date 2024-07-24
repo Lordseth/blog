@@ -1,5 +1,17 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+    // Instanciar base de datos y conexion
+    $baseDatos = new Basemysql();
+    $db = $baseDatos->connect();
+
+    // Instanciamos el objeto
+    $usuarios = new Usuario($db);
+    $resultado = $usuarios->leer();
+
+?>
+
 
 <div class="row">
     <div class="col-sm-6">
@@ -21,16 +33,18 @@
                 </thead>
                 <tbody>
               
+                <?php foreach($resultado as $usuario) : ?>                
                     <tr>
-                        <td>4</td>
-                        <td>juan garcía</td>
-                        <td>juancgr@gmail.com</td>
-                        <td>Registrado</td>
-                        <td>2020-12-15</td>
+                        <td><?php echo $usuario->usuario_id; ?></td>
+                        <td><?php echo $usuario->usuario_nombre; ?></td>
+                        <td><?php echo $usuario->usuario_email; ?></td>
+                        <td><?php echo $usuario->rol; ?></td>
+                        <td><?php echo $usuario->usuario_fecha_creacionn; ?></td>
                         <td>
-                            <a href="editar_usuario.php" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                                            
+                            <a href="editar_usuario.php?id=<?php echo $usuario->id; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                                            
                         </td>
                     </tr>
+                <?php endforeach; ?>
                                            
                 </tbody>       
             </table>
