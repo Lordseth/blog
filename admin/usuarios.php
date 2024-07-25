@@ -41,7 +41,7 @@
                         <td><?php echo $usuario->rol; ?></td>
                         <td><?php echo $usuario->usuario_fecha_creacionn; ?></td>
                         <td>
-                            <a href="editar_usuario.php?id=<?php echo $usuario->id; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                                            
+                            <a href="editar_usuario.php?id=<?php echo $usuario->usuario_id; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                                            
                         </td>
                     </tr>
                 <?php endforeach; ?>

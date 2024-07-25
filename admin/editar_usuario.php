@@ -1,5 +1,22 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+    // Instanciar base de datos y conexion
+    $baseDatos = new Basemysql();
+    $db = $baseDatos->connect();
+
+    // Validar si se envío el id
+    if(isset($_GET['id'])) {
+        $id = $_GET['id'];
+    }
+
+    // Instanciamos el objeto
+    $usuario = new Usuario($db);
+    $resultado = $usuario->leer_individual($id);
+
+    ?>
+
 
     <div class="row">
         <div class="col-sm-6">
@@ -10,7 +27,7 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action="">
 
-            <input type="hidden" name="id" value="8">
+            <input type="hidden" name="id" value="<?php  ?>">
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
