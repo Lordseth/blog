@@ -27,15 +27,15 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action="">
 
-            <input type="hidden" name="id" value="<?php  ?>">
+            <input type="hidden" name="id" value="<?php echo $resultado->usuario_id; ?>">
 
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre:</label>
-                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa el nombre" value="juan garcia" readonly>              
+                <input type="text" class="form-control" name="nombre" id="nombre" placeholder="Ingresa el nombre" value="<?php echo $resultado->usuario_nombre; ?>" readonly>              
             </div>
             <div class="mb-3">
                 <label for="email" class="form-label">Email:</label>
-                <input type="email" class="form-control" name="email" id="email" placeholder="Ingresa el email" value="juan@gmail.com" readonly>               
+                <input type="email" class="form-control" name="email" id="email" placeholder="Ingresa el email" value="<?php echo $resultado->usuario_email; ?>" readonly>               
             </div>
             <div class="mb-3">
             <label for="rol" class="form-label">Rol:</label>
