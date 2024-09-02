@@ -39,10 +39,10 @@
             </div>
             <div class="mb-3">
             <label for="rol" class="form-label">Rol:</label>
-            <select class="form-select" aria-label="Default select example" name="rol">
+            <select class="form-select" aria-label="Default select example" name="rol_id">
                 <option value="">--Selecciona un rol--</option>
-                <option value="1">Administrador</option>  
-                <option value="2">Registrado</option>
+                <option value="1" <?php if($resultado->rol_id == "Administrador") { echo "selected"; } ?>>Administrador</option>  
+                <option value="2" <?php if($resultado->rol_id == "Registrado") { echo "selected"; } ?>>Registrado</option>
                              
             </select>             
             </div>          

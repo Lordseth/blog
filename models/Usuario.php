@@ -35,7 +35,7 @@ class Usuario {
     //Obtener usuario individual
     public function leer_individual($id){
         //Crear query
-        $query = 'SELECT u.id AS usuario_id, u.nombre AS usuario_nombre, u.email AS usuario_email, u.fecha_creacionn AS usuario_fecha_creacionn, r.nombre AS rol  FROM ' . $this->table . ' u INNER JOIN roles r ON r.id = u.rol_id WHERE id = ? LIMIT 0,1 ';
+        $query = 'SELECT u.id AS usuario_id, u.nombre AS usuario_nombre, u.email AS usuario_email, u.fecha_creacionn AS usuario_fecha_creacionn, r.nombre AS rol  FROM ' . $this->table . ' u INNER JOIN roles r ON r.id = u.rol_id WHERE u.id = ? LIMIT 0,1 ';
 
         //Preparar sentencia
         $stmt = $this->conn->prepare($query);
