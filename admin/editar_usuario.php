@@ -15,6 +15,45 @@
     $usuario = new Usuario($db);
     $resultado = $usuario->leer_individual($id);
 
+    // Actualizar el rol
+    if (isset($_POST["editarUsuario"])) {
+        // Obtenemos valores de los campos
+        $idUsuario = $_POST["id"];
+        $rol = $_POST["rol"];
+
+        // Validamos que los campos no esten vacios
+        if (empty($idUsuario) || $idUsuario == '' || empty($rol) || $rol == '') {
+            $error = "Error,  algunos campos están vacios";
+        }else{
+            // Crear usuario
+            if ($usuario->actualizar($idUsuario, $rol)) {
+                $mensaje = "Usuario actualizado correctamente";
+                header("Location:usuarios.php?mensaje=" . urlencode($mensaje));
+                exit();
+            }else {
+                $error = "Error, No se pudo actualizar";
+            }
+        }
+
+        // Borrar el usuario
+        if (isset($_POST["borrarUsuario"])) {
+            // Obtenemos valores de los campos
+            $idUsuario = $_POST["id"];
+
+            // Instanciamos objeto usuario
+            $usuario = new Usuario($db);
+            
+            if ($usuario->borrar($idUsuario)) {
+                $mensaje = "Usuario borrado correctamente";
+                header("Location:usuarios.php?mensaje=" . urlencode($mensaje));
+                exit();
+            }else {
+                $error = "Error, No se pudo actualizar";
+            }
+    
+        }
+    }
+
     ?>
 
 

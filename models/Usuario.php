@@ -73,59 +73,40 @@ class Usuario {
     }
 
      //Actualizar un articulo
-     public function actualizar($id, $titulo, $texto, $newImageName){
+     public function actualizar($idUsuario, $rol){
 
-        if ($newImageName == "") {
+       
             //Crear query
-            $query = 'UPDATE ' . $this->table . ' SET titulo = :titulo, texto = :texto WHERE id = :id  ';
+            $query = 'UPDATE ' . $this->table . ' SET rol_id = :rol_id WHERE id = :id  ';
 
             //Preparar sentencia
             $stmt = $this->conn->prepare($query);
 
             // Vincular parametro
-            $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-            $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
-            $stmt->bindParam(":id", $id, PDO::PARAM_INT);
+            $stmt->bindParam(":rol_id", $rol, PDO::PARAM_INT);
+            $stmt->bindParam(":id", $idUsuario, PDO::PARAM_INT);
 
             //Ejecutar query
             if ($stmt->execute()) {
                 return true;
             }
-            }else {
-                 //Crear query
-                $query = 'UPDATE ' . $this->table . ' SET titulo = :titulo, texto = :texto, imagen = :imagen WHERE id = :id  ';
-
-                //Preparar sentencia
-                $stmt = $this->conn->prepare($query);
-
-                // Vincular parametro
-                $stmt->bindParam(":titulo", $titulo, PDO::PARAM_STR);
-                $stmt->bindParam(":texto", $texto, PDO::PARAM_STR);
-                $stmt->bindParam(":imagen", $newImageName, PDO::PARAM_STR);
-                $stmt->bindParam(":id", $id, PDO::PARAM_INT);
-                
-
-                //Ejecutar query
-                if ($stmt->execute()) {
-                    return true;
-                }
-            }
+            
 
             // Si hay error
             printf("error \n", $stmt->error);
-        
-    }
+
+     }
 
     //Borrar un articulo
-    public function borrar($idArticulo){
+    public function borrar($idUsuario){
         //Crear query
         $query = 'DELETE FROM ' . $this->table . ' WHERE id = :id ';
 
         //Preparar sentencia
         $stmt = $this->conn->prepare($query);
 
-        // Vincular parametro
-        $stmt->bindParam(":id", $idArticulo, PDO::PARAM_INT);
+        // Vincular parametros
+        $stmt->bindParam(":id", $idUsuario, PDO::PARAM_INT);
 
         //Ejecutar query
         if ($stmt->execute()) {
