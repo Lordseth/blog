@@ -9,10 +9,10 @@
     // Instanciamos el objeto
     $usuarios = new Usuario($db);
     $resultado = $usuarios->leer();
-
+ 
 ?>
 
-<<div class="row">
+<div class="row">
         <div class="col-sm-12">
             <?php if(isset($_GET['mensaje'])) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">

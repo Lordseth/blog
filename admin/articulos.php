@@ -10,7 +10,7 @@
     $articulos = new Articulo($db);
     $resultado = $articulos->leer();
 
-?>
+?> 
 
 <div class="row">
         <div class="col-sm-12">

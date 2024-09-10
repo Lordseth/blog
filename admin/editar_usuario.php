@@ -35,6 +35,8 @@
             }
         }
 
+         }
+
         // Borrar el usuario
         if (isset($_POST["borrarUsuario"])) {
             // Obtenemos valores de los campos
@@ -52,7 +54,7 @@
             }
     
         }
-    }
+    
 
     ?>
 
