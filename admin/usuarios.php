@@ -10,7 +10,7 @@
     $usuarios = new Usuario($db);
     $resultado = $usuarios->leer();
  
-?>
+?> 
 
 <div class="row">
         <div class="col-sm-12">

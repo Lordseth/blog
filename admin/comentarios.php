@@ -1,5 +1,17 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+    // Instanciar base de datos y conexion
+    $baseDatos = new Basemysql();
+    $db = $baseDatos->connect();
+
+    // Instanciamos el objeto
+    $comentarios = new Usuario($db);
+    $resultado = $usuarios->leer();
+ 
+?> 
+
 <div class="row">
     <div class="col-sm-6">
         <h3>Lista de Comentarios</h3>
