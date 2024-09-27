@@ -7,8 +7,8 @@
     $db = $baseDatos->connect();
 
     // Instanciamos el objeto
-    $comentarios = new Usuario($db);
-    $resultado = $usuarios->leer();
+    $comentarios = new Comentario($db);
+    $resultado = $comentarios->leer();
  
 ?> 
 
@@ -32,7 +32,7 @@
                     </tr>
                 </thead>
                 <tbody>
-             
+                <?php foreach($resultado as $comentario) : ?> 
                     <tr>
                         <td>4</td>
                         <td>texto comentario</td>
@@ -44,7 +44,7 @@
                             <a href="editar_comentario.php" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                            
                         </td>
                     </tr>
-              
+                <?php endforeach; ?>
                 </tbody>       
             </table>
     </div>
