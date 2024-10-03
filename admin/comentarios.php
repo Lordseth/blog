@@ -34,12 +34,12 @@
                 <tbody>
                 <?php foreach($resultado as $comentario) : ?> 
                     <tr>
-                        <td>4</td>
-                        <td>texto comentario</td>
-                        <td>juuan4@gmail.com</td>
-                        <td>titulo artículo</td> 
-                        <td>pendiente</td>
-                        <td>2020-11-12</td>              
+                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->id_comentario; ?></td>              
                         <td>
                             <a href="editar_comentario.php" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                            
                         </td>
