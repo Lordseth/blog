@@ -35,13 +35,15 @@
                 <?php foreach($resultado as $comentario) : ?> 
                     <tr>
                         <td><?php echo $comentario->id_comentario; ?></td>
-                        <td><?php echo $comentario->id_comentario; ?></td>
-                        <td><?php echo $comentario->id_comentario; ?></td>
-                        <td><?php echo $comentario->id_comentario; ?></td>
-                        <td><?php echo $comentario->id_comentario; ?></td>
+                        <td><?php echo $comentario->comentario; ?></td>
+                        <td><?php echo $comentario->nombre_usuario; ?></td>
+                        <td><?php echo $comentario->titulo_articulo; ?></td>
+                        <td><?php echo $comentario->estado; ?></td>
+                        <td><?php echo $comentario->fecha; ?></td>
+                        
                         <td><?php echo $comentario->id_comentario; ?></td>              
                         <td>
-                            <a href="editar_comentario.php" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                            
+                            <a href="editar_comentario.php?id=<?php echo $comentario->id_comentario; ?>" class="btn btn-warning"><i class="bi bi-pencil-fill"></i></a>                            
                         </td>
                     </tr>
                 <?php endforeach; ?>
