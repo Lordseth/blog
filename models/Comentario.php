@@ -34,7 +34,7 @@ class Comentario {
     //Obtener usuario individual
     public function leer_individual($id){
         //Crear query
-        $query = 'SELECT c.id AS id_comentario, c.comentario AS comentario, c.estado AS estado, c.fecha_creacionnn AS fecha, c.usuario_id, u.email AS nombre_usuario, a.titulo AS titulo_articulo  FROM ' . $this->table . ' c LEFT JOIN usuarios u ON u.id = c.usuario_id LEFT JOIN articulos a ON a.id = c.articulo_id WHERE a.id = c.articulo_id WHERE c.id = ? LIMIT 0,1';
+        $query = 'SELECT c.id AS id_comentario, c.comentario AS comentario, c.estado AS estado, c.fecha_creacionnn AS fecha, c.usuario_id, u.email AS nombre_usuario, a.titulo AS titulo_articulo  FROM ' . $this->table . ' c LEFT JOIN usuarios u ON u.id = c.usuario_id LEFT JOIN articulos a ON a.id = c.articulo_id WHERE c.id = ? LIMIT 0,1';
 
         //Preparar sentencia
         $stmt = $this->conn->prepare($query);
@@ -44,8 +44,8 @@ class Comentario {
 
         //Ejecutar query
         $stmt->execute();
-        $usuario = $stmt->fetch(PDO::FETCH_OBJ);
-        return $usuario;
+        $comentario = $stmt->fetch(PDO::FETCH_OBJ);
+        return $comentario;
     }
 
      //Crear un articulo

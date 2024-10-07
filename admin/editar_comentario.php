@@ -1,5 +1,22 @@
 <?php include("../includes/header.php") ?>
 
+<?php
+
+ // Instanciar base de datos y conexion
+ $baseDatos = new Basemysql();
+ $db = $baseDatos->connect();
+
+ // Validar si se envío el id
+ if(isset($_GET['id'])) {
+     $id = $_GET['id'];
+ }
+
+ // Instanciamos el objeto
+ $comentario = new Comentario($db);
+ $resultado = $comentario->leer_individual($id);
+
+ ?>
+
 <div class="row">
           
     </div>
@@ -13,18 +30,18 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action=""> 
 
-            <input type="hidden" name="id" value="4">
+            <input type="hidden" name="id" value="<?php echo $resultado->id_usuario;?>">
 
             <div class="mb-3">
                 <label for="texto">Texto</label>   
                 <textarea class="form-control" placeholder="Escriba el texto de su artículo" name="texto" style="height: 200px" readonly>
-                texto descripcion demo
+                <?php echo $resultado->comentario;?>
                 </textarea>              
             </div>               
 
             <div class="mb-3">
                 <label for="usuario" class="form-label">Usuario:</label>
-                <input type="text" class="form-control" value="juan@gmail.com" readonly>               
+                <input type="text" class="form-control" value="<?php echo $resultado->nombre_usuario;?>" readonly>               
             </div>
 
             <div class="mb-3">
