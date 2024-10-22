@@ -15,6 +15,26 @@
  $comentario = new Comentario($db);
  $resultado = $comentario->leer_individual($id);
 
+ // Editar Comentario
+ if (isset($_POST["editarComentario"])) {
+    // Obtenemos valores de los campos
+    $idComentario = $_POST["id"];
+    $estado = $_POST["cambiarEstado"];
+
+    // Instanciamos objeto usuario
+    $usuario = new Usuario($db);
+    
+    // Crear Usuario
+    if ($usuario->borrar($idUsuario)) {
+        $mensaje = "Usuario borrado correctamente";
+        header("Location:usuarios.php?mensaje=" . urlencode($mensaje));
+        exit();
+    }else {
+        $error = "Error, No se pudo actualizar";
+    }
+
+}
+
  ?>
 
 <div class="row">

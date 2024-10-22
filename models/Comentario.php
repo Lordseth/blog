@@ -71,19 +71,18 @@ class Comentario {
         
     }
 
-     //Actualizar un articulo
-     public function actualizar($idUsuario, $rol){
+     //Actualizar un comentario
+     public function actualizar($idComentario, $estado){
 
        
             //Crear query
-            $query = 'UPDATE ' . $this->table . ' SET rol_id = :rol_id WHERE id = :id  ';
+            $query = 'UPDATE ' . $this->table . ' SET estado = :estado WHERE id = :id  ';
 
             //Preparar sentencia
             $stmt = $this->conn->prepare($query);
 
             // Vincular parametro
-            $stmt->bindParam(":rol_id", $rol, PDO::PARAM_INT);
-            $stmt->bindParam(":id", $idUsuario, PDO::PARAM_INT);
+            $stmt->bindParam(":id", $idComentario, PDO::PARAM_INT);
 
             //Ejecutar query
             if ($stmt->execute()) {

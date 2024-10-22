@@ -45,6 +45,7 @@
             // Instanciamos objeto usuario
             $usuario = new Usuario($db);
             
+            // Crear Usuario
             if ($usuario->borrar($idUsuario)) {
                 $mensaje = "Usuario borrado correctamente";
                 header("Location:usuarios.php?mensaje=" . urlencode($mensaje));
