@@ -22,12 +22,12 @@
     $estado = $_POST["cambiarEstado"];
 
     // Instanciamos objeto usuario
-    $usuario = new Usuario($db);
+    $comentario = new Comentario($db);
     
     // Crear Usuario
-    if ($usuario->borrar($idUsuario)) {
-        $mensaje = "Usuario borrado correctamente";
-        header("Location:usuarios.php?mensaje=" . urlencode($mensaje));
+    if ($comentario->actualizar($idComentario, $estado)) {
+        $mensaje = "Comentario actualizado correctamente";
+        header("Location:comentarios.php?mensaje=" . urlencode($mensaje));
         exit();
     }else {
         $error = "Error, No se pudo actualizar";

@@ -83,6 +83,7 @@ class Comentario {
 
             // Vincular parametro
             $stmt->bindParam(":id", $idComentario, PDO::PARAM_INT);
+            $stmt->bindParam(":id", $estado, PDO::PARAM_INT);
 
             //Ejecutar query
             if ($stmt->execute()) {
