@@ -8,7 +8,7 @@
 
  // Validar si se envío el id
  if(isset($_GET['id'])) {
-     $id = $_GET['id'];
+     $idComentario = $_GET['id'];
  }
 
  // Instanciamos el objeto
@@ -50,7 +50,7 @@
         <div class="col-sm-6 offset-3">
         <form method="POST" action=""> 
 
-            <input type="hidden" name="id" value="<?php echo $resultado->id_usuario;?>">
+            <input type="hidden" name="id" value="<?php echo $resultado->id_comentario;?>">
 
             <div class="mb-3">
                 <label for="texto">Texto</label>   
