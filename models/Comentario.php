@@ -31,7 +31,7 @@ class Comentario {
         return $comentarios;
     }
 
-    //Obtener usuario individual
+    //Obtener articulo individual
     public function leer_individual($id){
         //Crear query
         $query = 'SELECT c.id AS id_comentario, c.comentario AS comentario, c.estado AS estado, c.fecha_creacionnn AS fecha, c.usuario_id, u.email AS nombre_usuario, a.titulo AS titulo_articulo  FROM ' . $this->table . ' c LEFT JOIN usuarios u ON u.id = c.usuario_id LEFT JOIN articulos a ON a.id = c.articulo_id WHERE c.id = ? LIMIT 0,1';
